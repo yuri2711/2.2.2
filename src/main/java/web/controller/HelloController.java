@@ -9,34 +9,35 @@ import org.springframework.web.bind.annotation.RequestParam;
 import web.model.Car;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Controller
 public class HelloController {
 
-	@GetMapping(value = "/")
-	public String printWelcome(ModelMap model) {
-		List<String> messages = new ArrayList<>();
-		messages.add("Hello!");
-		messages.add("I'm Spring MVC application");
-		messages.add("Ну ты ...  ");
-		model.addAttribute("messages", messages);
-		return "index";
-	}
+    @GetMapping(value = "/")
+    public String printWelcome(ModelMap model) {
+        List<String> messages = new ArrayList<>();
+        messages.add("Hello!");
+        model.addAttribute("messages", messages);
+        return "index";
+    }
 
-	@GetMapping(value = "/cars")
-	public String printCar(@RequestParam(value = "count", required = false) int size, ModelMap modelMap) {
-		List<Car> list = new ArrayList<>();
-		list.add(new Car("BMW", 500, 2));
-		list.add(new Car("BMW", 500, 2));
-		list.add(new Car("BMW", 500, 2));
-		list.add(new Car("BMW", 500, 2));
-		if(size==0 || size>=5){
-			modelMap.addAttribute("table", new String[]{"model", "series", "speed"});
-		}
-		return "car";
-	}
+    @GetMapping(value = "/cars")
+    public String printCar(@RequestParam(value = "count", required = false) int size, ModelMap modelMap) {
+        List<Car> list = new ArrayList<>();
+        list.add(new Car("BMW", 500, 2));
+        list.add(new Car("BMW", 500, 2));
+        list.add(new Car("BMW", 500, 2));
+        list.add(new Car("BMW", 500, 2));
+        if (size == 0 || size >= 5) {
+            modelMap.addAttribute("cars", list);
+        }else modelMap.addAttribute("cars", list.stream().limit(size).toArray());
+        return "car";
+    }
 
 
-	
 }

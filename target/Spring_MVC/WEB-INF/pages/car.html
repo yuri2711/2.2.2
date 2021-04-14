@@ -1,31 +1,23 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Авто</title>
+    <title>Cars</title>
 </head>
 <body>
-<table>
+<table border="1px solid grey">
     <caption>Cars</caption>
-    <tr th:each="name:${table}">
-        <td th:text="${name}"/>
-    </tr>
     <tr>
-        <th>dbb</th>
-        <th>dbb</th>
-        <th>dbb</th>
+        <th>model</th>
+        <th>speed</th>
+        <th>series</th>
     </tr>
-
-    <tr>
-        <th>dbb</th>
-        <th>dbb</th>
-        <th>dbb</th>
+    <!--/*@thymesVar id="cars" type=""*/-->
+    <tr th:each="car:${cars}">
+        <td th:text="${car.getModel()}">model</td>
+        <td th:text="${car.getSpeed()}">model</td>
+        <td th:text="${car.getSeries()}">model</td>
     </tr>
-    <tr>
-    <th>dbb</th>
-    <th>dbb</th>
-    <th>dbb</th>
-</tr>
 </table>
 <a href="/">back</a>
 </body>
