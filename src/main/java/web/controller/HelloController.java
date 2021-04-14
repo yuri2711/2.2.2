@@ -30,12 +30,13 @@ public class HelloController {
     public String printCar(@RequestParam(value = "count", required = false) int size, ModelMap modelMap) {
         List<Car> list = new ArrayList<>();
         list.add(new Car("BMW", 500, 2));
-        list.add(new Car("BMW", 500, 2));
-        list.add(new Car("BMW", 500, 2));
-        list.add(new Car("BMW", 500, 2));
+        list.add(new Car("Audi", 327, 1));
+        list.add(new Car("Mersedes", 170, 3));
+        list.add(new Car("BMW", 470, 1));
+        list.add(new Car("Toyota", 620, 9));
         if (size == 0 || size >= 5) {
             modelMap.addAttribute("cars", list);
-        }else modelMap.addAttribute("cars", list.stream().limit(size).toArray());
+        } else modelMap.addAttribute("cars", list.stream().limit(size).toArray());
         return "car";
     }
 
